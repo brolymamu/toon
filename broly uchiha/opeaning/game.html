@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighting Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        #player, #opponent {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            bottom: 0;
+        }
+
+        #player {
+            left: 50px;
+        }
+
+        #opponent {
+            right: 50px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="player"></div>
+    <div id="opponent"></div>
+
+    <script>
+        const player = document.getElementById('player');
+        const opponent = document.getElementById('opponent');
+
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            const playerPosition = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+            const opponentPosition = parseInt(window.getComputedStyle(opponent).getPropertyValue('right'));
+
+            if (key === 'a' && playerPosition > 0) {
+                player.style.left = `${playerPosition - 10}px`;
+            } else if (key === 'd' && playerPosition < window.innerWidth - 100) {
+                player.style.left = `${playerPosition + 10}px`;
+            } else if (key === 'j' && Math.abs(playerPosition - opponentPosition) < 100) {
+                alert('Player punched opponent!');
+            } else if (key === 'k' && Math.abs(playerPosition - opponentPosition) < 100) {
+                alert('Player kicked opponent!');
+            }
+        });
+    </script>
+</body>
+</html>
